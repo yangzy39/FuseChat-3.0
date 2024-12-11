@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="FuseChat-3.0: Preference Optimization for Implicit Model Fusion">
+  <meta property="og:title" content="FuseChat-3.0: Preference Optimization for Implicit Model Fusion"/>
+  <meta property="og:description" content="FuseChat-3.0 introduces implicit model fusion (IMF) with preference optimization to transfer capabilities of source models into target models."/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <meta property="og:image" content="static/images/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:title" content="FuseChat-3.0: Preference Optimization for Implicit Model Fusion">
+  <meta name="twitter:description" content="FuseChat-3.0 introduces implicit model fusion (IMF) with preference optimization to transfer capabilities of source models into target models.">
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="FuseChat-3.0, Implicit Model Fusion, Preference Optimization, LLMs, SFT, DPO">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FuseChat-3.0: Preference Optimization for Implicit Model Fusion</title>
+<!--   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">FuseChat-3.0: Preference Optimization for Implicit Model Fusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/yangzy39" target="_blank">Ziyi Yang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/18907305772" target="_blank">Fanqi Wan</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/MrGGLS" target="_blank">Longguang Zhong</a>,
+            </span>
+            <span class="author-block">
+              Canbin Huang,
+            </span>
+             <span class="author-block">
+              Guosheng Liang,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/xiaojunquan" target="_blank">Xiaojun Quan</a>
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">School of Computer Science and Engineering, Sun Yat-sen University, China</span>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://huggingface.co/FuseAI" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">🤗</span>
+                  <span>Hugging Face</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/SLIT-AI/FuseChat-3.0" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2412.03187" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<!-- Paper abstract -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <p>
+        In this blog post, we introduce FuseChat-3.0, a series of models designed to elevate model performance by fusing the strengths of multiple source models into smaller target models. Our approach involves using three mainstream smaller models—Llama-3.1-8B-Instruct, Gemma2-9B-it, and Qwen2.5-7B-Instruct—and two even smaller models—Llama-3.2-3B-Instruct and Llama-3.2-1B-Instruct—as target models. To achieve fusion, we utilized four powerful open-source source models: Gemma-2-27B-it, Mistral-Large-Instruct-2407, Qwen2.5-72B-Instruct, and Llama-3.1-70B-Instruct. The process employed a two-stage training pipeline comprising Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO). The resulting FuseChat-3.0 models demonstrated substantial improvements in general conversation, instruction following, mathematics, and coding tasks. Notably, when Llama-3.1-8B-Instruct was the target model, our fusion approach delivered a 6.8-point average improvement across 14 benchmarks. We release the <a href="https://huggingface.co/FuseAI" target="_blank">FuseChat-3.0</a> models on Huggingface, stay tuned for the forthcoming dataset and code.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+  
+<!-- Paper overview -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+           Combining the strengths of multiple large language models (LLMs) offers a promising pathway for enhancing individual model capabilities. Previous iterations of the FuseChat series adopted explicit model fusion (EMF), leveraging probabilistic distribution matrices generated by source models to transfer knowledge to target models. While effective, this method posed challenges, including vocabulary alignment and the merging of diverse distribution matrices, which could introduce noise and errors. Inspired by preference alignment techniques such as Direct Preference Optimization (DPO) and Simple Preference Optimization (SimPO), we developed implicit model fusion (IMF) in FuseChat-3.0. This approach introduces preference optimization to implicitly transfer the capabilities of source models into target models. Specifically, our method consists of a three-stage recipe, including dataset construction, supervised fine-tuning (SFT), and direct preference optimization (DPO). We will detail the overall pipeline in the following paragraph.  
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper overview -->
+
+<!-- Dataset Construction -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Dataset Construction</h2>
+        <div class="content has-text-justified">
+          <h3 class="title is-4">Prompt Selection</h3>
+          <p>
+            Our datasets were designed to enhance model's instruction following, general conversation, mathematics, coding, and Chinese-language capabilities. We selected data from open-source community datasets, applying targeted filtering and preprocessing. Key datasets and filtering criteria included:
+          </p>
+          <ul>
+            <li><strong>Instruction Following & General Conversation</strong>: Sourced from <a href="https://huggingface.co/datasets/openbmb/UltraFeedback" target="_blank">UltraFeedback</a>, <a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Pro-DPO-100K-v0.1" target="_blank">Magpie-Pro-DPO-100K-v0.1</a>, and <a href="https://huggingface.co/datasets/nvidia/HelpSteer2" target="_blank">HelpSteer2</a>, excluding code and math data.</li>
+            <li><strong>Mathematics</strong>: Selected from <a href="https://huggingface.co/datasets/nvidia/OpenMathInstruct-2" target="_blank">OpenMathInstruct-2</a>, with nearly 60,000 unique samples.</li>
+            <li><strong>Coding</strong>: Curated from <a href="https://huggingface.co/datasets/greengerong/leetcode" target="_blank">leetcode</a> and <a href="https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k" target="_blank">self-oss-instruct-sc2-exec-filter-50k</a>, retaining prompts with test cases.</li>
+            <li><strong>Chinese Language</strong>: Integrated <a href="https://huggingface.co/datasets/llamafactory/alpaca_gpt4_zh" target="_blank">alpaca_gpt4_zh</a> and <a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Qwen2-Pro-200K-Chinese" target="_blank">Magpie-Qwen2-Pro-200K-Chinese</a>, filtering out code and math prompts to retain approximately 10,000 high-quality samples.</li>
+          </ul>
+
+          <h3 class="title is-4">Sampling</h3>
+          <p>
+            For each dataset's prompts, we synthesized responses mainly from four different series of source models, specifically <a href="https://huggingface.co/google/gemma-2-27b-it" target="_blank">gemma-2-27b-it</a>, <a href="https://huggingface.co/mistralai/Mistral-Large-Instruct-2407" target="_blank">Mistral-Large-Instruct-2407</a>, <a href="https://huggingface.co/Qwen/Qwen2-72B-Instruct" target="_blank">Qwen2.5-72B-Instruct</a>, and <a href="https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct" target="_blank">Llama-3.1-70B-Instruct</a>. For instruction following and general conversation data, we sampled each prompt five times from all the source models. For code data, we sampled each prompt eight times for all source models. For Chinese data, we included single response sampled exclusively from Qwen2.5-72B-Instruct. For math data (OpenMathInstruct-2), we retained the responses generated by Llama-3.1-405B-Instruct from the original dataset and additionally sampled responses using <a href="https://huggingface.co/Qwen/Qwen2.5-Math-72B-Instruct" target="_blank">Qwen2.5-Math-72B-Instruct</a>. The sampling parameters for different models are detailed in Table 2.
+          </p>
+
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Source LLMs</th>
+                <th>Sampling Params</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>gemma-2-27b-it</td>
+                <td>Temp 0.8 Top-p 0.95</td>
+              </tr>
+              <tr>
+                <td>Mistral-Large-Instruct-2407</td>
+                <td>Temp 0.8 Top-p 0.95</td>
+              </tr>
+              <tr>
+                <td>Qwen2.5-(Math)-72B-Instruct</td>
+                <td>Temp 0.7 Top-p 0.8 Repetition penalty 1.05</td>
+              </tr>
+              <tr>
+                <td>Llama-3.1-70B-Instruct</td>
+                <td>Temp 0.8 Top-p 0.95</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 class="title is-4">Filtering</h3>
+          <p>
+            <strong>Instruction Following</strong>: For the five responses generated by each source model, we employed <a href="https://huggingface.co/RLHFlow/ArmoRM-Llama3-8B-v0.1" target="_blank">ArmoRM</a> for annotation to obtain RM scores. We divided the data into SFT and DPO datasets using a 4:6 ratio. For the SFT phase, we selected responses with the highest RM scores. For the DPO phase, we paired responses from the same source model, using those with the highest RM scores as positive samples and lowest RM scores as negative samples. We maintained an RM score difference between 0.01 and 0.1 for all pairs.
+          </p>
+          <p>
+            <strong>Math</strong>: For mathematical data, we leveraged the openmathinstruct2 dataset, evaluating responses from all source models and Llama3-405B-Instruct using ArmoRM. We strategically divided the data between SFT and DPO phases based on RM scores and gold answer. The DPO phase used paired samples from the same source model: correct answers with highest RM scores as positive samples and incorrect answers with lowest RM scores as negative samples. We maintained an RM score differential of 0.01 to 0.1 between positive and negative pairs. The left data samples are reserved for the SFT phase, incorporating correct answers with the highest RM scores.
+          </p>
+          <p>
+            <strong>Code</strong>: In the code domain, we sourced data from Leetcode and self-oss-instruct-sc2-exec-filter-50k from Huggingface, which included test cases. Our evaluation implemented a dual-scoring system: ArmoRM annotation of code segments and additional points for passing both static and dynamic checks. The SFT phase included responses that passed all tests with the highest RM scores, while the DPO phase contrasted high-scoring, test-passing responses (positive samples) with low-scoring, test-failing responses (negative samples). We excluded cases where all model responses failed the testing criteria.
+          </p>
+          <p>
+            <strong>Chinese</strong>: For Chinese language data, we utilized only Qwen2.5-72B-Instruct sampled responses for the SFT phase, deliberately excluding Chinese data from the DPO phase.
+          </p>
+
+          <p>
+            Our final dataset comprised 158,784 total entries, with 94,539 entries for the SFT phase and 64,245 preference pairs for the DPO phase. The overall composition of the datasets is shown below.
+          </p>
+
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>Selected Count</th>
+                <th>SFT Count</th>
+                <th>DPO Count</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/openbmb/UltraFeedback" target="_blank">UltraFeedback</a></td>
+                <td>51098</td>
+                <td>20439</td>
+                <td>30659</td>
+                <td>Instruction following</td>
+              </tr>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Pro-DPO-100K-v0.1" target="_blank">Magpie-Pro-DPO-100K-v0.1</a></td>
+                <td>20374</td>
+                <td>8149</td>
+                <td>12225</td>
+                <td>Instruction following</td>
+              </tr>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/nvidia/HelpSteer2" target="_blank">HelpSteer2</a></td>
+                <td>9435</td>
+                <td>3774</td>
+                <td>5661</td>
+                <td>Instruction following</td>
+              </tr>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/nvidia/OpenMathInstruct-2" target="_blank">OpenMathInstruct-2</a></td>
+                <td>58546</td>
+                <td>40188</td>
+                <td>11615</td>
+                <td>Math</td>
+              </tr>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/greengerong/leetcode" target="_blank">leetcode</a></td>
+                <td>3113</td>
+                <td>1877</td>
+                <td>1236</td>
+                <td>Coding</td>
+              </tr>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k" target="_blank">self-oss-instruct-sc2-exec-filter-50k</a></td>
+                <td>13696</td>
+                <td>10160</td>
+                <td>2849</td>
+                <td>Coding</td>
+              </tr>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/llamafactory/alpaca_gpt4_zh" target="_blank">alpaca_gpt4_zh</a></td>
+                <td>2471</td>
+                <td>2471</td>
+                <td>0</td>
+                <td>Chinese</td>
+              </tr>
+              <tr>
+                <td><a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Qwen2-Pro-200K-Chinese" target="_blank">Magpie-Qwen2-Pro-200K-Chinese</a></td>
+                <td>7481</td>
+                <td>7481</td>
+                <td>0</td>
+                <td>Chinese</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td>158784</td>
+                <td>94539</td>
+                <td>64245</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Dataset Construction -->
+
+<!-- Training Pipeline -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Training Pipeline</h2>
+        <div class="content has-text-justified">
+          <p>
+            The entire training process includes supervised fine-tuning (SFT) and direct preference optimization (DPO).
+          </p>
+
+          <h3 class="title is-4">SFT</h3>
+          <p>
+            We used <a href="https://github.com/hiyouga/LLaMA-Factory" target="_blank">Llama-Factory</a> as our fine-tuning library. For all target models, we fine-tuned for 3 epochs, with a batch size of 128 and a maximum sequence length of 2048 tokens. A cosine learning rate schedule with a warmup ratio of 0.1 is employed. Different models' learning rates are shown in the table below.
+          </p>
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Target Models</th>
+                <th>Learning rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Llama-3.1-8B-Instruct</td>
+                <td>5e-6</td>
+              </tr>
+              <tr>
+                <td>Qwen2.5-7B-Instruct</td>
+                <td>2e-6</td>
+              </tr>
+              <tr>
+                <td>Gemma-2-9B-it</td>
+                <td>2e-6</td>
+              </tr>
+              <tr>
+                <td>Llama-3.2-(1/3)B-Instruct</td>
+                <td>5e-6</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 class="title is-4">DPO</h3>
+          <p>
+            We used <a href="https://github.com/huggingface/alignment-handbook" target="_blank">alignment-handbook</a> as our DPO training library. For all Target SFT models, we trained for 1 epoch, set maximum sequence length to 2048, used cosine learning rate with a warmup ratio of 0.1. We saved checkpoints every 100 steps and selected the best from the last two checkpoints. For Llama-3.1 and Llama-3.2 series models, we introduced length normalization in DPO training, as shown in the formula below.
+          </p>
+          <p>
+            <img src="https://latex.codecogs.com/svg.image?\mathcal{L}_{\text{LN-DPO}}=-\log\sigma\left(\frac{\beta}{|y_w|}\log\frac{\pi_\theta(y_w|x)}{\pi_{\text{ref}}(y_w|x)}-\frac{\beta}{|y_l|}\log\frac{\pi_\theta(y_l|x)}{\pi_{\text{ref}}(y_l|x)}\right)" alt="Length Normalized DPO Formula" />
+          </p>
+          <p>
+            Different models' hyperparameters are shown in the table below.
+          </p>
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Target SFT Models</th>
+                <th>Learning rate</th>
+                <th>β</th>
+                <th>Length normalize</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FuseChat-Llama-3.1-8B-SFT</td>
+                <td>8e-7</td>
+                <td>10</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>FuseChat-Qwen2.5-7B-SFT</td>
+                <td>3e-7</td>
+                <td>0.01</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>FuseChat-gemma2-9b-SFT</td>
+                <td>5e-7</td>
+                <td>0.01</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>FuseChat-Llama-3.2-(1/3)B-SFT</td>
+                <td>1e-6</td>
+                <td>10</td>
+                <td>Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Training Pipeline -->
+
+<!-- Evaluation -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Evaluation</h2>
+        <div class="content has-text-justified">
+          <p>
+            The evaluation of instruction-tuned models mainly focuses on the model performance of instruction following, natural language understanding, general question answering, reasoning, mathematics, coding, etc. For the evaluation of FuseChat-3.0, we include 14 benchmarks and organize them into four categories:
+          </p>
+          <ul>
+            <li><strong>Instruction Following</strong> Tasks: AlpacaEval-2, Arena-Hard, MTbench, AlignBench v1.1 (Chinese).</li>
+            <li><strong>General</strong> Tasks: LiveBench-0831, MMLU-Pro, MMLU-redux, GPQA-Diamond.</li>
+            <li><strong>Math</strong> Tasks: GSM8K, MATH, AMC 23.</li>
+            <li><strong>Python Coding</strong> Tasks: HumanEval, MBPP, LiveCodeBench 2408-2411.</li>
+          </ul>
+          <p>
+            We include more details and release our evaluation code at <a href="https://github.com/SLIT-AI/FuseChat-3.0/FuseEval" target="_blank">FuseEval</a>.
+          </p>
+          <p>
+            The evaluation results of five series fused models are as follows, showing that our FuseChat-3.0 models achieved varying degrees of improvement across different target models. When selecting Llama3.1-8B-Instruct as the target model, our fusion model FuseChat-Llama-3.1-8B-Instruct achieved an average performance improvement of 6.8 points across 14 benchmarks. Notably, it showed significant improvements of 37.1 and 30.1 points on instruction-following test sets AlpacaEval-2 and Arena-Hard respectively. Additionally, FuseChat-Llama-3.1-8B-Instruct outperformed AllenAI's recently released Llama-3.1-Tulu-3-8B model on all benchmarks except GSM8K and GPQA-Diamond. All these results demonstrate the effectiveness and success of FuseChat-3.0.
+          </p>
+          <h3 class="title is-4">FuseChat-Llama3.1-8B-Instruct Performance</h3>
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Benchmarks</th>
+              <th>Llama3.1-8B-Instruct</th>
+              <th>Llama-3.1-Tulu-3-8B</th>
+              <th>FuseChat-Llama-3.1-8B-SFT</th>
+              <th>FuseChat-Llama-3.1-8B-Instruct</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AlpacaEval-2 (LC %)</td>
+              <td>28.3</td>
+              <td>33.4</td>
+              <td>41.3</td>
+              <td><strong>65.4</strong></td>
+            </tr>
+            <tr>
+              <td>Arena-Hard (WR %)</td>
+              <td>28.1</td>
+              <td>45.6</td>
+              <td>38.7</td>
+              <td><strong>58.2</strong></td>
+            </tr>
+            <tr>
+              <td>MT-Bench</td>
+              <td>8.38</td>
+              <td>8.34</td>
+              <td>8.54</td>
+              <td><strong>9</strong></td>
+            </tr>
+            <tr>
+              <td>AlignBench v1.1</td>
+              <td>4.61</td>
+              <td>6.2</td>
+              <td>6.25</td>
+              <td><strong>6.69</strong></td>
+            </tr>
+            <tr>
+              <td>LiveBench 0831</td>
+              <td>27.6</td>
+              <td>30.1</td>
+              <td>30.2</td>
+              <td><strong>32</strong></td>
+            </tr>
+            <tr>
+              <td>GSM8K</td>
+              <td>85.9</td>
+              <td><strong>88.6</strong></td>
+              <td>87</td>
+              <td>88</td>
+            </tr>
+            <tr>
+              <td>MATH</td>
+              <td>50.7</td>
+              <td>47.5</td>
+              <td>54.7</td>
+              <td><strong>55.2</strong></td>
+            </tr>
+            <tr>
+              <td>AMC 23</td>
+              <td>25</td>
+              <td>25</td>
+              <td>30</td>
+              <td><strong>37.5</strong></td>
+            </tr>
+            <tr>
+              <td>MMLU-Pro</td>
+              <td><strong>50</strong></td>
+              <td>42.9</td>
+              <td>47.8</td>
+              <td>49.2</td>
+            </tr>
+            <tr>
+              <td>MMLU-redux</td>
+              <td>67.2</td>
+              <td>66.3</td>
+              <td>68.4</td>
+              <td><strong>69.2</strong></td>
+            </tr>
+            <tr>
+              <td>GPQA-Diamond</td>
+              <td>33.8</td>
+              <td>35.9</td>
+              <td><strong>37.9</strong></td>
+              <td>34.9</td>
+            </tr>
+            <tr>
+              <td>HumanEval</td>
+              <td>69.5</td>
+              <td>66.5</td>
+              <td>69.5</td>
+              <td><strong>71.3</strong></td>
+            </tr>
+            <tr>
+              <td>MBPP</td>
+              <td><strong>75.4</strong></td>
+              <td>56.3</td>
+              <td>71.4</td>
+              <td>72</td>
+            </tr>
+            <tr>
+              <td>LiveCodeBench 2408-2411</td>
+              <td>12.3</td>
+              <td>10.6</td>
+              <td>12.6</td>
+              <td><strong>13.1</strong></td>
+            </tr>
+            <tr>
+              <td>Average</td>
+              <td>40.5</td>
+              <td>40.2</td>
+              <td>43.2</td>
+              <td><strong>47.3</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="title is-4">FuseChat-Qwen2.5-7B-Instruct Performance</h3>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Datasets</th>
+              <th>Qwen2.5-7B-Instruct</th>
+              <th>FuseChat-Qwen2.5-7B-SFT</th>
+              <th>FuseChat-Qwen2.5-7B-Instruct</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AlpacaEval-2 (LC %)</td>
+              <td>33.2</td>
+              <td>34.2</td>
+              <td><strong>63.6</strong></td>
+            </tr>
+            <tr>
+              <td>Arena-Hard (WR %)</td>
+              <td>50.7</td>
+              <td>45.2</td>
+              <td><strong>61.4</strong></td>
+            </tr>
+            <tr>
+              <td>MT-Bench</td>
+              <td>8.42</td>
+              <td>8.46</td>
+              <td><strong>8.98</strong></td>
+            </tr>
+            <tr>
+              <td>AlignBench v1.1</td>
+              <td>7.49</td>
+              <td>7.35</td>
+              <td><strong>7.61</strong></td>
+            </tr>
+            <tr>
+              <td>LiveBench-0831</td>
+              <td><strong>35.4</strong></td>
+              <td>33.7</td>
+              <td>33.2</td>
+            </tr>
+            <tr>
+              <td>GSM8K</td>
+              <td>91.7</td>
+              <td><strong>92.3</strong></td>
+              <td>91.7</td>
+            </tr>
+            <tr>
+              <td>MATH</td>
+              <td><strong>75</strong></td>
+              <td>72.7</td>
+              <td>73.6</td>
+            </tr>
+            <tr>
+              <td>AMC 23</td>
+              <td>52.5</td>
+              <td>45</td>
+              <td><strong>57.5</strong></td>
+            </tr>
+            <tr>
+              <td>MMLU-Pro</td>
+              <td><strong>54.1</strong></td>
+              <td>51.7</td>
+              <td>53</td>
+            </tr>
+            <tr>
+              <td>MMLU-redux</td>
+              <td><strong>75.1</strong></td>
+              <td>72.7</td>
+              <td>74.4</td>
+            </tr>
+            <tr>
+              <td>GPQA-Diamond</td>
+              <td>34.9</td>
+              <td><strong>38.4</strong></td>
+              <td>33.8</td>
+            </tr>
+            <tr>
+              <td>HumanEval</td>
+              <td><strong>85.4</strong></td>
+              <td>81.7</td>
+              <td>79.9</td>
+            </tr>
+            <tr>
+              <td>MBPP</td>
+              <td>80.2</td>
+              <td><strong>84.1</strong></td>
+              <td>83.1</td>
+            </tr>
+            <tr>
+              <td>LiveCodeBench 2408-2411</td>
+              <td>15.8</td>
+              <td>17.3</td>
+              <td><strong>18.9</strong></td>
+            </tr>
+            <tr>
+              <td>Average</td>
+              <td>50</td>
+              <td>48.9</td>
+              <td><strong>52.9</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="title is-4">FuseChat-gemma2-9b-Instruct Performance</h3>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Datasets</th>
+              <th>gemma-2-9b-it</th>
+              <th>FuseChat-gemma2-9b-SFT</th>
+              <th>FuseChat-gemma2-9b-Instruct</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AlpacaEval-2 (LC %)</td>
+              <td>51.1</td>
+              <td>49.8</td>
+              <td><strong>70.2</strong></td>
+            </tr>
+            <tr>
+              <td>Arena-Hard (WR %)</td>
+              <td>40.8</td>
+              <td>58.3</td>
+              <td><strong>63.4</strong></td>
+            </tr>
+            <tr>
+              <td>MT-Bench</td>
+              <td>8.49</td>
+              <td><strong>8.68</strong></td>
+              <td>8.64</td>
+            </tr>
+            <tr>
+              <td>AlignBench v1.1</td>
+              <td>7.04</td>
+              <td>7.05</td>
+              <td><strong>7.41</strong></td>
+            </tr>
+            <tr>
+              <td>LiveBench-0831</td>
+              <td>31.6</td>
+              <td><strong>33.3</strong></td>
+              <td>33.2</td>
+            </tr>
+            <tr>
+              <td>GSM8K</td>
+              <td>88.5</td>
+              <td>90.5</td>
+              <td><strong>91</strong></td>
+            </tr>
+            <tr>
+              <td>MATH</td>
+              <td>49.6</td>
+              <td><strong>58</strong></td>
+              <td>57.8</td>
+            </tr>
+            <tr>
+              <td>AMC 23</td>
+              <td>20</td>
+              <td>27.5</td>
+              <td><strong>35</strong></td>
+            </tr>
+            <tr>
+              <td>MMLU-Pro</td>
+              <td>50.5</td>
+              <td>52.5</td>
+              <td><strong>52.9</strong></td>
+            </tr>
+            <tr>
+              <td>MMLU-redux</td>
+              <td>72.8</td>
+              <td>72.8</td>
+              <td><strong>73.7</strong></td>
+            </tr>
+            <tr>
+              <td>GPQA-Diamond</td>
+              <td><strong>39.4</strong></td>
+              <td>33.3</td>
+              <td>35.4</td>
+            </tr>
+            <tr>
+              <td>HumanEval</td>
+              <td><strong>67.1</strong></td>
+              <td>65.9</td>
+              <td>64</td>
+            </tr>
+            <tr>
+              <td>MBPP</td>
+              <td><strong>75.1</strong></td>
+              <td>70.6</td>
+              <td>71.7</td>
+            </tr>
+            <tr>
+              <td>LiveCodeBench 2408-2411</td>
+              <td><strong>11.9</strong></td>
+              <td>11</td>
+              <td>10.1</td>
+            </tr>
+            <tr>
+              <td>Average</td>
+              <td>43.9</td>
+              <td>45.7</td>
+              <td><strong>48.2</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="title is-4">FuseChat-Llama-3.2-3B-Instruct Performance</h3>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Benchmarks</th>
+              <th>Llama3.2-3B-Instruct</th>
+              <th>FuseChat-Llama-3.2-3B-SFT</th>
+              <th>FuseChat-Llama-3.2-3B-Instruct</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AlpacaEval-2 (LC %)</td>
+              <td>21.4</td>
+              <td>31.1</td>
+              <td><strong>54</strong></td>
+            </tr>
+            <tr>
+              <td>Arena-Hard (WR %)</td>
+              <td>16.6</td>
+              <td>21.3</td>
+              <td><strong>30.2</strong></td>
+            </tr>
+            <tr>
+              <td>MT-Bench</td>
+              <td>6.87</td>
+              <td>7.33</td>
+              <td><strong>7.66</strong></td>
+            </tr>
+            <tr>
+              <td>AlignBench v1.1</td>
+              <td>3.83</td>
+              <td>5.5</td>
+              <td><strong>5.91</strong></td>
+            </tr>
+            <tr>
+              <td>LiveBench 0831</td>
+              <td>23.4</td>
+              <td>24.5</td>
+              <td><strong>24.9</strong></td>
+            </tr>
+            <tr>
+              <td>GSM8K</td>
+              <td>82</td>
+              <td><strong>82.8</strong></td>
+              <td>82</td>
+            </tr>
+            <tr>
+              <td>MATH</td>
+              <td>51.4</td>
+              <td>52.9</td>
+              <td><strong>53.1</strong></td>
+            </tr>
+            <tr>
+              <td>AMC23</td>
+              <td>22.5</td>
+              <td>20</td>
+              <td><strong>35</strong></td>
+            </tr>
+            <tr>
+              <td>MMLU-Pro</td>
+              <td>39.3</td>
+              <td><strong>40.3</strong></td>
+              <td>40.3</td>
+            </tr>
+            <tr>
+              <td>MMLU-redux</td>
+              <td>58.5</td>
+              <td>58.2</td>
+              <td><strong>59</strong></td>
+            </tr>
+            <tr>
+              <td>GPQA-Diamond</td>
+              <td>29.8</td>
+              <td>33.3</td>
+              <td><strong>33.8</strong></td>
+            </tr>
+            <tr>
+              <td>HumanEval</td>
+              <td>61</td>
+              <td><strong>62.8</strong></td>
+              <td>60.4</td>
+            </tr>
+            <tr>
+              <td>MBPP</td>
+              <td><strong>68.5</strong></td>
+              <td>67.5</td>
+              <td>67.5</td>
+            </tr>
+            <tr>
+              <td>LiveCodeBench 2408-2411</td>
+              <td>8.3</td>
+              <td>7.1</td>
+              <td><strong>9</strong></td>
+            </tr>
+            <tr>
+              <td>Average</td>
+              <td>35.2</td>
+              <td>36.8</td>
+              <td><strong>40.2</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="title is-4">FuseChat-Llama-3.2-1B-Instruct Performance</h3>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Benchmarks</th>
+              <th>Llama3.2-1B-Instruct</th>
+              <th>FuseChat-Llama-3.2-1B-SFT</th>
+              <th>FuseChat-Llama-3.2-1B-Instruct</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AlpacaEval-2 (LC %)</td>
+              <td>9.7</td>
+              <td>14</td>
+              <td><strong>25.3</strong></td>
+            </tr>
+            <tr>
+              <td>Arena-Hard (WR %)</td>
+              <td>5.1</td>
+              <td>6</td>
+              <td><strong>8.6</strong></td>
+            </tr>
+            <tr>
+              <td>MT-Bench</td>
+              <td>4.71</td>
+              <td>5.17</td>
+              <td><strong>5.74</strong></td>
+            </tr>
+            <tr>
+              <td>AlignBench v1.1</td>
+              <td>2.88</td>
+              <td>3.86</td>
+              <td><strong>4.25</strong></td>
+            </tr>
+            <tr>
+              <td>LiveBench 0831</td>
+              <td>14.0</td>
+              <td>13.9</td>
+              <td><strong>15.8</strong></td>
+            </tr>
+            <tr>
+              <td>GSM8K</td>
+              <td>46.3</td>
+              <td><strong>55.6</strong></td>
+              <td>54.5</td>
+            </tr>
+            <tr>
+              <td>MATH</td>
+              <td>32.7</td>
+              <td><strong>34.7</strong></td>
+              <td>33.6</td>
+            </tr>
+            <tr>
+              <td>AMC23</td>
+              <td>17.5</td>
+              <td>15</td>
+              <td><strong>20</strong></td>
+            </tr>
+            <tr>
+              <td>MMLU-Pro</td>
+              <td><strong>22.3</strong></td>
+              <td>21.5</td>
+              <td>21.3</td>
+            </tr>
+            <tr>
+              <td>MMLU</td>
+              <td><strong>45.8</strong></td>
+              <td>45</td>
+              <td>44.8</td>
+            </tr>
+            <tr>
+              <td>GPQA-Diamond</td>
+              <td>21.2</td>
+              <td><strong>25.3</strong></td>
+              <td>24.2</td>
+            </tr>
+            <tr>
+              <td>HumanEval</td>
+              <td>39.6</td>
+              <td>36.6</td>
+              <td><strong>40.2</strong></td>
+            </tr>
+            <tr>
+              <td>MBPP</td>
+              <td><strong>49.5</strong></td>
+              <td>42.1</td>
+              <td>46.6</td>
+            </tr>
+            <tr>
+              <td>Average</td>
+              <td>24</td>
+              <td>24.5</td>
+              <td><strong>26.5</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Evaluation -->
+
+<!-- BibTeX Citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{yang2024wrpo,
+  title={Weighted-Reward Preference Optimization for Implicit Model Fusion},
+  author={Ziyi Yang and Fanqi Wan and Longguang Zhong and Tianyuan Shi and Xiaojun Quan},
+  journal={arXiv preprint arXiv:2412.03187},
+  year={2024}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
