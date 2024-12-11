@@ -648,307 +648,339 @@
           </tr>
         </table>
         <h3 class="title is-4">FuseChat-gemma2-9b-Instruct Performance</h3>
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th>Datasets</th>
-              <th>gemma-2-9b-it</th>
-              <th>FuseChat-gemma2-9b-SFT</th>
-              <th>FuseChat-gemma2-9b-Instruct</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>AlpacaEval-2 (LC %)</td>
-              <td>51.1</td>
-              <td>49.8</td>
-              <td><strong>70.2</strong></td>
-            </tr>
-            <tr>
-              <td>Arena-Hard (WR %)</td>
-              <td>40.8</td>
-              <td>58.3</td>
-              <td><strong>63.4</strong></td>
-            </tr>
-            <tr>
-              <td>MT-Bench</td>
-              <td>8.49</td>
-              <td><strong>8.68</strong></td>
-              <td>8.64</td>
-            </tr>
-            <tr>
-              <td>AlignBench v1.1</td>
-              <td>7.04</td>
-              <td>7.05</td>
-              <td><strong>7.41</strong></td>
-            </tr>
-            <tr>
-              <td>LiveBench-0831</td>
-              <td>31.6</td>
-              <td><strong>33.3</strong></td>
-              <td>33.2</td>
-            </tr>
-            <tr>
-              <td>GSM8K</td>
-              <td>88.5</td>
-              <td>90.5</td>
-              <td><strong>91</strong></td>
-            </tr>
-            <tr>
-              <td>MATH</td>
-              <td>49.6</td>
-              <td><strong>58</strong></td>
-              <td>57.8</td>
-            </tr>
-            <tr>
-              <td>AMC 23</td>
-              <td>20</td>
-              <td>27.5</td>
-              <td><strong>35</strong></td>
-            </tr>
-            <tr>
-              <td>MMLU-Pro</td>
-              <td>50.5</td>
-              <td>52.5</td>
-              <td><strong>52.9</strong></td>
-            </tr>
-            <tr>
-              <td>MMLU-redux</td>
-              <td>72.8</td>
-              <td>72.8</td>
-              <td><strong>73.7</strong></td>
-            </tr>
-            <tr>
-              <td>GPQA-Diamond</td>
-              <td><strong>39.4</strong></td>
-              <td>33.3</td>
-              <td>35.4</td>
-            </tr>
-            <tr>
-              <td>HumanEval</td>
-              <td><strong>67.1</strong></td>
-              <td>65.9</td>
-              <td>64</td>
-            </tr>
-            <tr>
-              <td>MBPP</td>
-              <td><strong>75.1</strong></td>
-              <td>70.6</td>
-              <td>71.7</td>
-            </tr>
-            <tr>
-              <td>LiveCodeBench 2408-2411</td>
-              <td><strong>11.9</strong></td>
-              <td>11</td>
-              <td>10.1</td>
-            </tr>
-            <tr>
-              <td>Average</td>
-              <td>43.9</td>
-              <td>45.7</td>
-              <td><strong>48.2</strong></td>
-            </tr>
-          </tbody>
+        <table class="js-sort-table table hidden">
+          <tr>
+            <td class="js-sort-string"><strong>Datasets</strong></td>
+            <td class="js-sort-string"><strong>gemma-2-9b-it</strong></td>
+            <td class="js-sort-string"><strong>FuseChat-gemma2-9b-SFT</strong></td>
+            <td class="js-sort-string"><strong>FuseChat-gemma2-9b-Instruct</strong></td>
+          </tr>
+        
+          <tr>
+            <td>AlpacaEval-2 (LC %)</td>
+            <td>51.1</td>
+            <td>49.8</td>
+            <td><strong>70.2</strong></td>
+          </tr>
+        
+          <tr>
+            <td>Arena-Hard (WR %)</td>
+            <td>40.8</td>
+            <td>58.3</td>
+            <td><strong>63.4</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MT-Bench</td>
+            <td>8.49</td>
+            <td><strong>8.68</strong></td>
+            <td>8.64</td>
+          </tr>
+        
+          <tr>
+            <td>AlignBench v1.1</td>
+            <td>7.04</td>
+            <td>7.05</td>
+            <td><strong>7.41</strong></td>
+          </tr>
+        
+          <tr>
+            <td>LiveBench-0831</td>
+            <td>31.6</td>
+            <td><strong>33.3</strong></td>
+            <td>33.2</td>
+          </tr>
+        
+          <tr>
+            <td>GSM8K</td>
+            <td>88.5</td>
+            <td>90.5</td>
+            <td><strong>91</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MATH</td>
+            <td>49.6</td>
+            <td><strong>58</strong></td>
+            <td>57.8</td>
+          </tr>
+        
+          <tr>
+            <td>AMC 23</td>
+            <td>20</td>
+            <td>27.5</td>
+            <td><strong>35</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MMLU-Pro</td>
+            <td>50.5</td>
+            <td>52.5</td>
+            <td><strong>52.9</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MMLU-redux</td>
+            <td>72.8</td>
+            <td>72.8</td>
+            <td><strong>73.7</strong></td>
+          </tr>
+        
+          <tr>
+            <td>GPQA-Diamond</td>
+            <td><strong>39.4</strong></td>
+            <td>33.3</td>
+            <td>35.4</td>
+          </tr>
+        
+          <tr>
+            <td>HumanEval</td>
+            <td><strong>67.1</strong></td>
+            <td>65.9</td>
+            <td>64</td>
+          </tr>
+        
+          <tr>
+            <td>MBPP</td>
+            <td><strong>75.1</strong></td>
+            <td>70.6</td>
+            <td>71.7</td>
+          </tr>
+        
+          <tr>
+            <td>LiveCodeBench 2408-2411</td>
+            <td><strong>11.9</strong></td>
+            <td>11</td>
+            <td>10.1</td>
+          </tr>
+        
+          <tr>
+            <td>Average</td>
+            <td>43.9</td>
+            <td>45.7</td>
+            <td><strong>48.2</strong></td>
+          </tr>
         </table>
         <h3 class="title is-4">FuseChat-Llama-3.2-3B-Instruct Performance</h3>
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th>Benchmarks</th>
-              <th>Llama3.2-3B-Instruct</th>
-              <th>FuseChat-Llama-3.2-3B-SFT</th>
-              <th>FuseChat-Llama-3.2-3B-Instruct</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>AlpacaEval-2 (LC %)</td>
-              <td>21.4</td>
-              <td>31.1</td>
-              <td><strong>54</strong></td>
-            </tr>
-            <tr>
-              <td>Arena-Hard (WR %)</td>
-              <td>16.6</td>
-              <td>21.3</td>
-              <td><strong>30.2</strong></td>
-            </tr>
-            <tr>
-              <td>MT-Bench</td>
-              <td>6.87</td>
-              <td>7.33</td>
-              <td><strong>7.66</strong></td>
-            </tr>
-            <tr>
-              <td>AlignBench v1.1</td>
-              <td>3.83</td>
-              <td>5.5</td>
-              <td><strong>5.91</strong></td>
-            </tr>
-            <tr>
-              <td>LiveBench 0831</td>
-              <td>23.4</td>
-              <td>24.5</td>
-              <td><strong>24.9</strong></td>
-            </tr>
-            <tr>
-              <td>GSM8K</td>
-              <td>82</td>
-              <td><strong>82.8</strong></td>
-              <td>82</td>
-            </tr>
-            <tr>
-              <td>MATH</td>
-              <td>51.4</td>
-              <td>52.9</td>
-              <td><strong>53.1</strong></td>
-            </tr>
-            <tr>
-              <td>AMC23</td>
-              <td>22.5</td>
-              <td>20</td>
-              <td><strong>35</strong></td>
-            </tr>
-            <tr>
-              <td>MMLU-Pro</td>
-              <td>39.3</td>
-              <td><strong>40.3</strong></td>
-              <td>40.3</td>
-            </tr>
-            <tr>
-              <td>MMLU-redux</td>
-              <td>58.5</td>
-              <td>58.2</td>
-              <td><strong>59</strong></td>
-            </tr>
-            <tr>
-              <td>GPQA-Diamond</td>
-              <td>29.8</td>
-              <td>33.3</td>
-              <td><strong>33.8</strong></td>
-            </tr>
-            <tr>
-              <td>HumanEval</td>
-              <td>61</td>
-              <td><strong>62.8</strong></td>
-              <td>60.4</td>
-            </tr>
-            <tr>
-              <td>MBPP</td>
-              <td><strong>68.5</strong></td>
-              <td>67.5</td>
-              <td>67.5</td>
-            </tr>
-            <tr>
-              <td>LiveCodeBench 2408-2411</td>
-              <td>8.3</td>
-              <td>7.1</td>
-              <td><strong>9</strong></td>
-            </tr>
-            <tr>
-              <td>Average</td>
-              <td>35.2</td>
-              <td>36.8</td>
-              <td><strong>40.2</strong></td>
-            </tr>
-          </tbody>
+        <table class="js-sort-table table hidden">
+          <tr>
+            <td class="js-sort-string"><strong>Benchmarks</strong></td>
+            <td class="js-sort-string"><strong>Llama3.2-3B-Instruct</strong></td>
+            <td class="js-sort-string"><strong>FuseChat-Llama-3.2-3B-SFT</strong></td>
+            <td class="js-sort-string"><strong>FuseChat-Llama-3.2-3B-Instruct</strong></td>
+          </tr>
+        
+          <tr>
+            <td>AlpacaEval-2 (LC %)</td>
+            <td>21.4</td>
+            <td>31.1</td>
+            <td><strong>54</strong></td>
+          </tr>
+        
+          <tr>
+            <td>Arena-Hard (WR %)</td>
+            <td>16.6</td>
+            <td>21.3</td>
+            <td><strong>30.2</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MT-Bench</td>
+            <td>6.87</td>
+            <td>7.33</td>
+            <td><strong>7.66</strong></td>
+          </tr>
+        
+          <tr>
+            <td>AlignBench v1.1</td>
+            <td>3.83</td>
+            <td>5.5</td>
+            <td><strong>5.91</strong></td>
+          </tr>
+        
+          <tr>
+            <td>LiveBench 0831</td>
+            <td>23.4</td>
+            <td>24.5</td>
+            <td><strong>24.9</strong></td>
+          </tr>
+        
+          <tr>
+            <td>GSM8K</td>
+            <td>82</td>
+            <td><strong>82.8</strong></td>
+            <td>82</td>
+          </tr>
+        
+          <tr>
+            <td>MATH</td>
+            <td>51.4</td>
+            <td>52.9</td>
+            <td><strong>53.1</strong></td>
+          </tr>
+        
+          <tr>
+            <td>AMC23</td>
+            <td>22.5</td>
+            <td>20</td>
+            <td><strong>35</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MMLU-Pro</td>
+            <td>39.3</td>
+            <td><strong>40.3</strong></td>
+            <td>40.3</td>
+          </tr>
+        
+          <tr>
+            <td>MMLU-redux</td>
+            <td>58.5</td>
+            <td>58.2</td>
+            <td><strong>59</strong></td>
+          </tr>
+        
+          <tr>
+            <td>GPQA-Diamond</td>
+            <td>29.8</td>
+            <td>33.3</td>
+            <td><strong>33.8</strong></td>
+          </tr>
+        
+          <tr>
+            <td>HumanEval</td>
+            <td>61</td>
+            <td><strong>62.8</strong></td>
+            <td>60.4</td>
+          </tr>
+        
+          <tr>
+            <td>MBPP</td>
+            <td><strong>68.5</strong></td>
+            <td>67.5</td>
+            <td>67.5</td>
+          </tr>
+        
+          <tr>
+            <td>LiveCodeBench 2408-2411</td>
+            <td>8.3</td>
+            <td>7.1</td>
+            <td><strong>9</strong></td>
+          </tr>
+        
+          <tr>
+            <td>Average</td>
+            <td>35.2</td>
+            <td>36.8</td>
+            <td><strong>40.2</strong></td>
+          </tr>
         </table>
         <h3 class="title is-4">FuseChat-Llama-3.2-1B-Instruct Performance</h3>
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-          <thead>
-            <tr>
-              <th>Benchmarks</th>
-              <th>Llama3.2-1B-Instruct</th>
-              <th>FuseChat-Llama-3.2-1B-SFT</th>
-              <th>FuseChat-Llama-3.2-1B-Instruct</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>AlpacaEval-2 (LC %)</td>
-              <td>9.7</td>
-              <td>14</td>
-              <td><strong>25.3</strong></td>
-            </tr>
-            <tr>
-              <td>Arena-Hard (WR %)</td>
-              <td>5.1</td>
-              <td>6</td>
-              <td><strong>8.6</strong></td>
-            </tr>
-            <tr>
-              <td>MT-Bench</td>
-              <td>4.71</td>
-              <td>5.17</td>
-              <td><strong>5.74</strong></td>
-            </tr>
-            <tr>
-              <td>AlignBench v1.1</td>
-              <td>2.88</td>
-              <td>3.86</td>
-              <td><strong>4.25</strong></td>
-            </tr>
-            <tr>
-              <td>LiveBench 0831</td>
-              <td>14.0</td>
-              <td>13.9</td>
-              <td><strong>15.8</strong></td>
-            </tr>
-            <tr>
-              <td>GSM8K</td>
-              <td>46.3</td>
-              <td><strong>55.6</strong></td>
-              <td>54.5</td>
-            </tr>
-            <tr>
-              <td>MATH</td>
-              <td>32.7</td>
-              <td><strong>34.7</strong></td>
-              <td>33.6</td>
-            </tr>
-            <tr>
-              <td>AMC23</td>
-              <td>17.5</td>
-              <td>15</td>
-              <td><strong>20</strong></td>
-            </tr>
-            <tr>
-              <td>MMLU-Pro</td>
-              <td><strong>22.3</strong></td>
-              <td>21.5</td>
-              <td>21.3</td>
-            </tr>
-            <tr>
-              <td>MMLU</td>
-              <td><strong>45.8</strong></td>
-              <td>45</td>
-              <td>44.8</td>
-            </tr>
-            <tr>
-              <td>GPQA-Diamond</td>
-              <td>21.2</td>
-              <td><strong>25.3</strong></td>
-              <td>24.2</td>
-            </tr>
-            <tr>
-              <td>HumanEval</td>
-              <td>39.6</td>
-              <td>36.6</td>
-              <td><strong>40.2</strong></td>
-            </tr>
-            <tr>
-              <td>MBPP</td>
-              <td><strong>49.5</strong></td>
-              <td>42.1</td>
-              <td>46.6</td>
-            </tr>
-            <tr>
-              <td>Average</td>
-              <td>24</td>
-              <td>24.5</td>
-              <td><strong>26.5</strong></td>
-            </tr>
-          </tbody>
+        <table class="js-sort-table table hidden">
+          <tr>
+            <td class="js-sort-string"><strong>Benchmarks</strong></td>
+            <td class="js-sort-string"><strong>Llama3.2-1B-Instruct</strong></td>
+            <td class="js-sort-string"><strong>FuseChat-Llama-3.2-1B-SFT</strong></td>
+            <td class="js-sort-string"><strong>FuseChat-Llama-3.2-1B-Instruct</strong></td>
+          </tr>
+        
+          <tr>
+            <td>AlpacaEval-2 (LC %)</td>
+            <td>9.7</td>
+            <td>14</td>
+            <td><strong>25.3</strong></td>
+          </tr>
+        
+          <tr>
+            <td>Arena-Hard (WR %)</td>
+            <td>5.1</td>
+            <td>6</td>
+            <td><strong>8.6</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MT-Bench</td>
+            <td>4.71</td>
+            <td>5.17</td>
+            <td><strong>5.74</strong></td>
+          </tr>
+        
+          <tr>
+            <td>AlignBench v1.1</td>
+            <td>2.88</td>
+            <td>3.86</td>
+            <td><strong>4.25</strong></td>
+          </tr>
+        
+          <tr>
+            <td>LiveBench 0831</td>
+            <td>14.0</td>
+            <td>13.9</td>
+            <td><strong>15.8</strong></td>
+          </tr>
+        
+          <tr>
+            <td>GSM8K</td>
+            <td>46.3</td>
+            <td><strong>55.6</strong></td>
+            <td>54.5</td>
+          </tr>
+        
+          <tr>
+            <td>MATH</td>
+            <td>32.7</td>
+            <td><strong>34.7</strong></td>
+            <td>33.6</td>
+          </tr>
+        
+          <tr>
+            <td>AMC23</td>
+            <td>17.5</td>
+            <td>15</td>
+            <td><strong>20</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MMLU-Pro</td>
+            <td><strong>22.3</strong></td>
+            <td>21.5</td>
+            <td>21.3</td>
+          </tr>
+        
+          <tr>
+            <td>MMLU</td>
+            <td><strong>45.8</strong></td>
+            <td>45</td>
+            <td>44.8</td>
+          </tr>
+        
+          <tr>
+            <td>GPQA-Diamond</td>
+            <td>21.2</td>
+            <td><strong>25.3</strong></td>
+            <td>24.2</td>
+          </tr>
+        
+          <tr>
+            <td>HumanEval</td>
+            <td>39.6</td>
+            <td>36.6</td>
+            <td><strong>40.2</strong></td>
+          </tr>
+        
+          <tr>
+            <td>MBPP</td>
+            <td><strong>49.5</strong></td>
+            <td>42.1</td>
+            <td>46.6</td>
+          </tr>
+        
+          <tr>
+            <td>Average</td>
+            <td>24</td>
+            <td>24.5</td>
+            <td><strong>26.5</strong></td>
+          </tr>
         </table>
         </div>
       </div>
