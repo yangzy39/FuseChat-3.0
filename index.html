@@ -191,82 +191,86 @@
           <p>
             Our final dataset comprised 158,784 total entries, with 94,539 entries for the SFT phase and 64,245 preference pairs for the DPO phase. The overall composition of the datasets is shown below.
           </p>
-
-          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-            <thead>
-              <tr>
-                <th>Dataset</th>
-                <th>Selected Count</th>
-                <th>SFT Count</th>
-                <th>DPO Count</th>
-                <th>Category</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/openbmb/UltraFeedback" target="_blank">UltraFeedback</a></td>
-                <td>51098</td>
-                <td>20439</td>
-                <td>30659</td>
-                <td>Instruction following</td>
-              </tr>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Pro-DPO-100K-v0.1" target="_blank">Magpie-Pro-DPO-100K-v0.1</a></td>
-                <td>20374</td>
-                <td>8149</td>
-                <td>12225</td>
-                <td>Instruction following</td>
-              </tr>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/nvidia/HelpSteer2" target="_blank">HelpSteer2</a></td>
-                <td>9435</td>
-                <td>3774</td>
-                <td>5661</td>
-                <td>Instruction following</td>
-              </tr>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/nvidia/OpenMathInstruct-2" target="_blank">OpenMathInstruct-2</a></td>
-                <td>58546</td>
-                <td>40188</td>
-                <td>11615</td>
-                <td>Math</td>
-              </tr>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/greengerong/leetcode" target="_blank">leetcode</a></td>
-                <td>3113</td>
-                <td>1877</td>
-                <td>1236</td>
-                <td>Coding</td>
-              </tr>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k" target="_blank">self-oss-instruct-sc2-exec-filter-50k</a></td>
-                <td>13696</td>
-                <td>10160</td>
-                <td>2849</td>
-                <td>Coding</td>
-              </tr>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/llamafactory/alpaca_gpt4_zh" target="_blank">alpaca_gpt4_zh</a></td>
-                <td>2471</td>
-                <td>2471</td>
-                <td>0</td>
-                <td>Chinese</td>
-              </tr>
-              <tr>
-                <td><a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Qwen2-Pro-200K-Chinese" target="_blank">Magpie-Qwen2-Pro-200K-Chinese</a></td>
-                <td>7481</td>
-                <td>7481</td>
-                <td>0</td>
-                <td>Chinese</td>
-              </tr>
-              <tr>
-                <td><strong>Total</strong></td>
-                <td>158784</td>
-                <td>94539</td>
-                <td>64245</td>
-                <td></td>
-              </tr>
-            </tbody>
+          <table class="js-sort-table table hidden">
+            <tr>
+              <td class="js-sort-string"><strong>Dataset</strong></td>
+              <td class="js-sort-number"><strong>Total Count</strong></td>
+              <td class="js-sort-number"><strong>SFT Count</strong></td>
+              <td class="js-sort-number"><strong>DPO Count</strong></td>
+              <td class="js-sort-string"><strong>Category</strong></td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/openbmb/UltraFeedback" target="_blank">UltraFeedback</a></td>
+              <td>51098</td>
+              <td>20439</td>
+              <td>30659</td>
+              <td>Instruction following</td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Pro-DPO-100K-v0.1" target="_blank">Magpie-Pro-DPO-100K-v0.1</a></td>
+              <td>20374</td>
+              <td>8149</td>
+              <td>12225</td>
+              <td>Instruction following</td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/nvidia/HelpSteer2" target="_blank">HelpSteer2</a></td>
+              <td>9435</td>
+              <td>3774</td>
+              <td>5661</td>
+              <td>Instruction following</td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/nvidia/OpenMathInstruct-2" target="_blank">OpenMathInstruct-2</a></td>
+              <td>58546</td>
+              <td>40188</td>
+              <td>11615</td>
+              <td>Math</td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/greengerong/leetcode" target="_blank">leetcode</a></td>
+              <td>3113</td>
+              <td>1877</td>
+              <td>1236</td>
+              <td>Coding</td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k" target="_blank">self-oss-instruct-sc2-exec-filter-50k</a></td>
+              <td>13696</td>
+              <td>10160</td>
+              <td>2849</td>
+              <td>Coding</td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/llamafactory/alpaca_gpt4_zh" target="_blank">alpaca_gpt4_zh</a></td>
+              <td>2471</td>
+              <td>2471</td>
+              <td>0</td>
+              <td>Chinese</td>
+            </tr>
+          
+            <tr>
+              <td><a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Qwen2-Pro-200K-Chinese" target="_blank">Magpie-Qwen2-Pro-200K-Chinese</a></td>
+              <td>7481</td>
+              <td>7481</td>
+              <td>0</td>
+              <td>Chinese</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Total</strong></td>
+              <td>158784</td>
+              <td>94539</td>
+              <td>64245</td>
+              <td></td>
+            </tr>
           </table>
         </div>
       </div>
