@@ -41,13 +41,13 @@
           <h1 class="title is-1 publication-title">FuseChat-3.0: Preference Optimization for Implicit Model Fusion</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://github.com/yangzy39" target="_blank">Ziyi Yang</a>,
+              <a href="https://github.com/yangzy39" target="_blank">Ziyi Yang*</a>,
             </span>
             <span class="author-block">
-              <a href="https://github.com/18907305772" target="_blank">Fanqi Wan</a>,
+              <a href="https://fanqiwan.github.io/" target="_blank">Fanqi Wan*</a>,
             </span>
             <span class="author-block">
-              <a href="https://github.com/MrGGLS" target="_blank">Longguang Zhong</a>,
+              <a href="https://github.com/MrGGLS" target="_blank">Longguang Zhong*</a>,
             </span>
             <span class="author-block">
               Canbin Huang,
@@ -56,11 +56,12 @@
               Guosheng Liang,
             </span>
             <span class="author-block">
-              <a href="https://sites.google.com/site/xiaojunquan" target="_blank">Xiaojun Quan</a>
+              <a href="https://sites.google.com/site/xiaojunquan" target="_blank">Xiaojun Quan†</a>
             </span>
           </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block">School of Computer Science and Engineering, Sun Yat-sen University, China</span>
+            <span class="author-block">*Main contributor †Corresponding author</span>
           </div>
           <div class="column has-text-centered">
             <div class="publication-links">
@@ -99,7 +100,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <p>
-        In this blog post, we introduce FuseChat-3.0, a series of models designed to elevate model performance by fusing the strengths of multiple source models into smaller target models. Our approach involves using three mainstream smaller models—Llama-3.1-8B-Instruct, Gemma2-9B-it, and Qwen2.5-7B-Instruct—and two even smaller models—Llama-3.2-3B-Instruct and Llama-3.2-1B-Instruct—as target models. To achieve fusion, we utilized four powerful open-source source models: Gemma-2-27B-it, Mistral-Large-Instruct-2407, Qwen2.5-72B-Instruct, and Llama-3.1-70B-Instruct. The process employed a two-stage training pipeline comprising Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO). The resulting FuseChat-3.0 models demonstrated substantial improvements in general conversation, instruction following, mathematics, and coding tasks. Notably, when Llama-3.1-8B-Instruct was the target model, our fusion approach delivered a 6.8-point average improvement across 14 benchmarks. We release the <a href="https://huggingface.co/FuseAI" target="_blank">FuseChat-3.0</a> models on Huggingface, stay tuned for the forthcoming dataset and code.
+        In this blog post, we present FuseChat-3.0, a series of models crafted to enhance performance by integrating the strengths of multiple source LLMs into more compact target LLMs. To achieve this fusion, we utilized four powerful source LLMs: Gemma-2-27B-it, Mistral-Large-Instruct-2407, Qwen2.5-72B-Instruct, and Llama-3.1-70B-Instruct. For the target LLMs, we employed three widely-used smaller models—Llama-3.1-8B-Instruct, Gemma2-9B-it, and Qwen2.5-7B-Instruct—along with two even more compact models—Llama-3.2-3B-Instruct and Llama-3.2-1B-Instruct. The implicit model fusion process involves a two-stage training pipeline comprising Supervised Fine-Tuning (SFT) to mitigate distribution discrepancies between target and source LLMs, and Direct Preference Optimization (DPO) for learning preferences from multiple source LLMs. The resulting FuseChat-3.0 models demonstrated substantial improvements in tasks related to general conversation, instruction following, mathematics, and coding. **Notably, when Llama-3.1-8B-Instruct served as the target LLM, our fusion approach achieved an average improvement of 6.8 points across 14 benchmarks. Moreover, it showed significant improvements of 37.1 and 30.1 points on instruction-following test sets AlpacaEval-2 and Arena-Hard respectively.** We have released the <a href="https://huggingface.co/FuseAI" target="_blank">FuseChat-3.0</a> models on Huggingface, stay tuned for the forthcoming dataset and code.
       </p>
     </div>
   </div>
@@ -155,9 +156,18 @@
 
           <h3 class="title is-4">Sampling</h3>
           <p>
-            For each dataset's prompts, we synthesized responses mainly from four different series of source models, specifically <a href="https://huggingface.co/google/gemma-2-27b-it" target="_blank">gemma-2-27b-it</a>, <a href="https://huggingface.co/mistralai/Mistral-Large-Instruct-2407" target="_blank">Mistral-Large-Instruct-2407</a>, <a href="https://huggingface.co/Qwen/Qwen2-72B-Instruct" target="_blank">Qwen2.5-72B-Instruct</a>, and <a href="https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct" target="_blank">Llama-3.1-70B-Instruct</a>. For instruction following and general conversation data, we sampled each prompt five times from all the source models. For code data, we sampled each prompt eight times for all source models. For Chinese data, we included single response sampled exclusively from Qwen2.5-72B-Instruct. For math data (OpenMathInstruct-2), we retained the responses generated by Llama-3.1-405B-Instruct from the original dataset and additionally sampled responses using <a href="https://huggingface.co/Qwen/Qwen2.5-Math-72B-Instruct" target="_blank">Qwen2.5-Math-72B-Instruct</a>. The sampling parameters for different models are detailed in Table 2.
+            For each dataset's prompts, we synthesized responses mainly from four different series of source models, specifically <a href="https://huggingface.co/google/gemma-2-27b-it" target="_blank">gemma-2-27b-it</a>, <a href="https://huggingface.co/mistralai/Mistral-Large-Instruct-2407" target="_blank">Mistral-Large-Instruct-2407</a>, <a href="https://huggingface.co/Qwen/Qwen2-72B-Instruct" target="_blank">Qwen2.5-72B-Instruct</a>, and <a href="https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct" target="_blank">Llama-3.1-70B-Instruct</a>.
           </p>
-
+          <ul>
+            <li><strong>Instruction Following & General Conversation</strong>: We sampled each prompt five times from all the source models.</li>
+            <li><strong>Mathematics</strong>: We retained the responses generated by Llama-3.1-405B-Instruct from the original dataset (OpenMathInstruct-2) and additionally sampled responses using <a href="https://huggingface.co/Qwen/Qwen2.5-Math-72B-Instruct" target="_blank">Qwen2.5-Math-72B-Instruct</a>.</li>
+            <li><strong>Coding</strong>: We sampled each prompt eight times for all source models.</li>
+            <li><strong>Chinese Language</strong>: We included single response sampled exclusively from Qwen2.5-72B-Instruct.</li>
+          </ul>
+          <p>
+            The sampling parameters for different models are detailed in Table 2.
+          </p>
+          
           <table class="js-sort-table table hidden">
             <tr>
               <td class="js-sort-string"><strong>Source LLMs</strong></td>
@@ -189,16 +199,16 @@
 
           <h3 class="title is-4">Filtering</h3>
           <p>
-            <strong>Instruction Following</strong>: For the five responses generated by each source model, we employed <a href="https://huggingface.co/RLHFlow/ArmoRM-Llama3-8B-v0.1" target="_blank">ArmoRM</a> for annotation to obtain RM scores. We divided the data into SFT and DPO datasets using a 4:6 ratio. For the SFT phase, we selected responses with the highest RM scores. For the DPO phase, we paired responses from the same source model, using those with the highest RM scores as positive samples and lowest RM scores as negative samples. We maintained an RM score difference between 0.01 and 0.1 for all pairs.
+            <strong>Instruction Following</strong>: To assign RM scores to the five responses generated by each source model, we employed <a href="https://huggingface.co/RLHFlow/ArmoRM-Llama3-8B-v0.1" target="_blank">ArmoRM</a> for annotation. We then divided the annotated data into SFT and DPO datasets using a 4:6 ratio. For the SFT phase, we selected the responses with the highest RM scores. During the DPO phase, we paired responses from the same source model, designating those with the highest RM scores as positive samples and those with the lowest RM scores as negative samples. We ensured that the RM score difference between the positive and negative samples in each pair ranged from 0.01 to 0.1.
           </p>
           <p>
-            <strong>Math</strong>: For mathematical data, we leveraged the openmathinstruct2 dataset, evaluating responses from all source models and Llama3-405B-Instruct using ArmoRM. We strategically divided the data between SFT and DPO phases based on RM scores and gold answer. The DPO phase used paired samples from the same source model: correct answers with highest RM scores as positive samples and incorrect answers with lowest RM scores as negative samples. We maintained an RM score differential of 0.01 to 0.1 between positive and negative pairs. The left data samples are reserved for the SFT phase, incorporating correct answers with the highest RM scores.
+            <strong>Mathematics</strong>: We initially annotated the responses from all source models for correctness by comparing them with the gold labels and evaluating them using the RM scores provided by ArmoRM. We then strategically divided the dataset into SFT phase and DPO phase. In the SFT phase, we incorporated responses that were correct and had the highest RM scores. This selection ensured that the fine-tuning process was based on high-quality responses that aligned closely with the desired outcomes. For the DPO phase, we constructed paired samples from the same source model. The positive samples consisted of correct answers with the highest RM scores, while the negative samples were incorrect answers with the lowest RM scores. To ensure meaningful comparisons during optimization, we maintained an RM score differential between positive and negative pairs within the range of 0.01 to 0.1.
           </p>
           <p>
-            <strong>Code</strong>: In the code domain, we sourced data from Leetcode and self-oss-instruct-sc2-exec-filter-50k from Huggingface, which included test cases. Our evaluation implemented a dual-scoring system: ArmoRM annotation of code segments and additional points for passing both static and dynamic checks. The SFT phase included responses that passed all tests with the highest RM scores, while the DPO phase contrasted high-scoring, test-passing responses (positive samples) with low-scoring, test-failing responses (negative samples). We excluded cases where all model responses failed the testing criteria.
+            <strong>Coding</strong>: We employed a dual-scoring system comprising correctness scores and RM scores for coding evaluation. The correctness scores assessed whether the code passed both static analysis and test cases, ensuring functional accuracy. The RM scores were used for preference evaluation, gauging the quality of responses based on predefined criteria. During the SFT phase, we included responses that not only passed all test cases but also achieved the highest RM scores. This selection ensured that the model was fine-tuned on exemplary code that met both correctness and preference standards. In the DPO phase, we contrasted positive samples—high-scoring responses that passed the tests—with negative samples—low-scoring responses that failed the tests. This comparison aimed to optimize the model's ability to prefer higher-quality code during training. We excluded any instances where all model responses failed to meet the testing criteria. This exclusion was necessary to maintain the integrity of the evaluation process, as such cases did not provide meaningful data for assessing and improving the model's performance.
           </p>
           <p>
-            <strong>Chinese</strong>: For Chinese language data, we utilized only Qwen2.5-72B-Instruct sampled responses for the SFT phase, deliberately excluding Chinese data from the DPO phase.
+            <strong>Chinese</strong>: We exclusively utilized responses sampled from Qwen2.5-72B-Instruct during the SFT phase, due to its strong performance in the Chinese language.
           </p>
 
           <p>
@@ -242,7 +252,7 @@
               <td>58546</td>
               <td>40188</td>
               <td>11615</td>
-              <td>Math</td>
+              <td>Mathematics</td>
             </tr>
           
             <tr>
@@ -266,7 +276,7 @@
               <td>2471</td>
               <td>2471</td>
               <td>0</td>
-              <td>Chinese</td>
+              <td>Chinese Language</td>
             </tr>
           
             <tr>
@@ -274,7 +284,7 @@
               <td>7481</td>
               <td>7481</td>
               <td>0</td>
-              <td>Chinese</td>
+              <td>Chinese Language</td>
             </tr>
           
             <tr>
@@ -282,7 +292,7 @@
               <td>158784</td>
               <td>94539</td>
               <td>64245</td>
-              <td></td>
+              <td>All</td>
             </tr>
 
             
@@ -302,7 +312,7 @@
         <h2 class="title is-3">Training Pipeline</h2>
         <div class="content has-text-justified">
           <p>
-            The entire training process includes supervised fine-tuning (SFT) and direct preference optimization (DPO).
+            TThe implicit model fusion process involves a two-stage training pipeline comprising Supervised Fine-Tuning (SFT) to mitigate distribution discrepancies between target and source LLMs, and Direct Preference Optimization (DPO) for learning preferences from multiple source LLMs.
           </p>
 
           <h3 class="title is-4">SFT</h3>
@@ -406,14 +416,14 @@
           <ul>
             <li><strong>Instruction Following</strong> Tasks: AlpacaEval-2, Arena-Hard, MTbench, AlignBench v1.1 (Chinese).</li>
             <li><strong>General</strong> Tasks: LiveBench-0831, MMLU-Pro, MMLU-redux, GPQA-Diamond.</li>
-            <li><strong>Math</strong> Tasks: GSM8K, MATH, AMC 23.</li>
-            <li><strong>Python Coding</strong> Tasks: HumanEval, MBPP, LiveCodeBench 2408-2411.</li>
+            <li><strong>Mathematics</strong> Tasks: GSM8K, MATH, AMC 23.</li>
+            <li><strong>Coding</strong> Tasks: HumanEval, MBPP, LiveCodeBench 2408-2411.</li>
           </ul>
           <p>
             We include more details and release our evaluation code at <a href="https://github.com/SLIT-AI/FuseChat-3.0/FuseEval" target="_blank">FuseEval</a>.
           </p>
           <p>
-            The evaluation results of five series fused models are as follows, showing that our FuseChat-3.0 models achieved varying degrees of improvement across different target models. When selecting Llama3.1-8B-Instruct as the target model, our fusion model FuseChat-Llama-3.1-8B-Instruct achieved an average performance improvement of 6.8 points across 14 benchmarks. Notably, it showed significant improvements of 37.1 and 30.1 points on instruction-following test sets AlpacaEval-2 and Arena-Hard respectively. Additionally, FuseChat-Llama-3.1-8B-Instruct outperformed AllenAI's recently released Llama-3.1-Tulu-3-8B model on all benchmarks except GSM8K and GPQA-Diamond. All these results demonstrate the effectiveness and success of FuseChat-3.0.
+            The evaluation results of five series fused models are as follows, showing that our FuseChat-3.0 models achieved varying degrees of improvement across different target models. When selecting Llama3.1-8B-Instruct as the target model, our fusion model **FuseChat-Llama-3.1-8B-Instruct achieved an average performance improvement of 6.8 points across 14 benchmarks. Notably, it showed significant improvements of 37.1 and 30.1 points on instruction-following test sets AlpacaEval-2 and Arena-Hard respectively.** Additionally, FuseChat-Llama-3.1-8B-Instruct outperformed AllenAI's recently released Llama-3.1-Tulu-3-8B model on all benchmarks except GSM8K and GPQA-Diamond. All these results demonstrate the effectiveness and success of FuseChat-3.0.
           </p>
           <h3 class="title is-4">FuseChat-Llama3.1-8B-Instruct Performance</h3>
           <table class="js-sort-table table hidden">
