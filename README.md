@@ -12,10 +12,20 @@ FuseChat-3.0: Preference Optimization for Implicit Model Fusion
 
 <h4> |<a href="https://arxiv.org/abs/2412.03187"> 📑 Paper </a> |
 <a href="https://github.com/SLIT-AI/FuseChat-3.0"> 🐱 GitHub Repo </a> |
-<a href="https://huggingface.co/FuseAI"> 🤗 Hugging Face </a> |
+<a href="https://huggingface.co/FuseAI"> 🤗 HuggingFace Repo</a> |
 <a href="https://slit-ai.github.io/FuseChat-3.0/"> 🌐 Website </a> |
 </h4>
 
+<!-- **Authors:** -->
+
+_Ziyi Yang*, Fanqi Wan*, Longguang Zhong*, Canbin Huang, Guosheng Liang, Xiaojun Quan†_
+
+
+<!-- **Affiliations:** -->
+
+_Sun Yat-sen University_
+
+_*Main Contributors †Corresponding Author_
 
 </div>
 
