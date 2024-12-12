@@ -223,7 +223,7 @@ We used [Llama-Factory](https://github.com/hiyouga/LLaMA-Factory) as our fine-tu
 </table>
 
 ### DPO
-We used [alignment-handbook](https://github.com/huggingface/alignment-handbook) as our DPO training library. For all Target SFT models, we trained for 1 epoch, set maximum sequence length to 2048, used cosine learning rate with a warmup ratio of 0.1. We saved checkpoints every 100 steps and selected the best from the last two checkpoints. For Llama-3.1 and Llama-3.2 series models, we introduced length normalization in DPO training, as shown in the formula below.
+We used [alignment-handbook](https://github.com/huggingface/alignment-handbook) as our DPO training library. For all Target SFT models, we trained for 1 epoch with a batch size of 128, set maximum sequence length to 2048, used cosine learning rate with a warmup ratio of 0.1. We saved checkpoints every 100 steps and selected the best from the last two checkpoints. For Llama-3.1 and Llama-3.2 series models, we introduced length normalization in DPO training, as shown in the formula below.
 
 ![Length Normalized DPO Formula](https://latex.codecogs.com/svg.image?\mathcal{L}_{\text{LN-DPO}}=-\log\sigma\left(\frac{\beta}{|y_w|}\log\frac{\pi_\theta(y_w|x)}{\pi_{\text{ref}}(y_w|x)}-\frac{\beta}{|y_l|}\log\frac{\pi_\theta(y_l|x)}{\pi_{\text{ref}}(y_l|x)}\right))
 
