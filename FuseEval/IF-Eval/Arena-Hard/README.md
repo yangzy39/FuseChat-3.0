@@ -5,11 +5,6 @@ You can install the required packages with the following command:
 ```bash
 pip install -r requirements.txt
 ```
-Prepare model_answer and model_judgment for style-controlled evaluation.
-```bash
-cd data
-tar -xzvf model_files.tar.gz
-```
 Please refer to [lmarena/arena-hard-auto](https://github.com/lmarena/arena-hard-auto) for detailed setup instructions.
 ### Evaluation
 The whole evaluation process contains three steps: inference, LLM judgments, and results display. 
@@ -60,11 +55,5 @@ The whole evaluation process contains three steps: inference, LLM judgments, and
    bash eval.sh 
    ```
    
-   Display Style Control Win Rate:
-   ```bash
-   bash eval_sc.sh 
-   ```
-
-
 ## Acknowledgement
 The codebase is adapted from [lmarena/arena-hard-auto](https://github.com/lmarena/arena-hard-auto).
