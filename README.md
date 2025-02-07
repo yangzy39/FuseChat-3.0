@@ -102,7 +102,7 @@ Unlike the original approach in [WRPO](https://arxiv.org/abs/2412.03187), which 
 - **Coding**: We employed a dual-scoring system comprising correctness scores and RM scores for coding evaluation. The correctness scores assessed whether the code passed both static analysis and test cases, ensuring functional accuracy. The RM scores were used for preference evaluation, gauging the quality of responses based on predefined criteria. During the SFT phase, we included responses that not only passed all test cases but also achieved the highest RM scores. This selection ensured that the model was fine-tuned on exemplary code that met both correctness and preference standards. In the DPO phase, we contrasted positive samples—high-scoring responses that passed the tests—with negative samples—low-scoring responses that failed the tests. This comparison aimed to optimize the model's ability to prefer higher-quality code during training. We excluded any instances where all model responses failed to meet the testing criteria. This exclusion was necessary to maintain the integrity of the evaluation process, as such cases did not provide meaningful data for assessing and improving the model's performance.
 - **Chinese**: We exclusively utilized responses sampled from Qwen-2.5-72B-Instruct during the SFT phase, due to its strong performance in the Chinese language.
 
-Our final dataset comprised 158,784 total entries, with 94,539 entries for the SFT phase and 64,245 preference pairs for the DPO phase. The overall composition of the datasets is shown below.
+Our final dataset comprised 158,667 total entries, with 94,539 entries for the SFT phase and 64,128 preference pairs for the DPO phase. The overall composition of the datasets is shown below.
 
 <table class="js-sort-table table hidden">
   <tr>
@@ -155,9 +155,9 @@ Our final dataset comprised 158,784 total entries, with 94,539 entries for the S
 
   <tr>
     <td><a href="https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k" target="_blank">self-oss-instruct-sc2</a></td>
-    <td>13009</td>
+    <td>12892</td>
     <td>10160</td>
-    <td>2849</td>
+    <td>2732</td>
     <td>Coding</td>
   </tr>
 
@@ -179,9 +179,9 @@ Our final dataset comprised 158,784 total entries, with 94,539 entries for the S
 
   <tr>
     <td><strong>Total</strong></td>
-    <td>158784</td>
+    <td>158667</td>
     <td>94539</td>
-    <td>64245</td>
+    <td>64128</td>
     <td>All</td>
   </tr>
 
