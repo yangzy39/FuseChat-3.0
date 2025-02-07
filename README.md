@@ -51,7 +51,7 @@ Our IMF method follows a three-stage process aimed at effectively transferring c
 Our datasets were designed to enhance model's instruction following, general conversation, mathematics, coding, and Chinese-language capabilities. We selected data from open-source community datasets, applying targeted filtering and preprocessing. Key datasets and filtering criteria included:
 
 - **Instruction Following & General Conversation**: Sourced from [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback), [Magpie-Pro-DPO-100K-v0.1](https://huggingface.co/datasets/Magpie-Align/Magpie-Pro-DPO-100K-v0.1), and [HelpSteer2](https://huggingface.co/datasets/nvidia/HelpSteer2), excluding code and math data.
-- **Mathematics**: Selected from [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2), with nearly 60,000 unique samples.
+- **Mathematics**: Selected from [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2), with nearly 52,000 unique samples.
 - **Coding**: Curated from [leetcode](https://huggingface.co/datasets/greengerong/leetcode) and [self-oss-instruct-sc2-exec-filter-50k](https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k), retaining prompts with test cases.
 - **Chinese Language**: Integrated [alpaca_gpt4_zh](https://huggingface.co/datasets/llamafactory/alpaca_gpt4_zh) and [Magpie-Qwen2-Pro-200K-Chinese](https://huggingface.co/datasets/Magpie-Align/Magpie-Qwen2-Pro-200K-Chinese), filtering out code and math prompts to retain approximately 10,000 high-quality samples.
 
@@ -139,7 +139,7 @@ Our final dataset comprised 158,784 total entries, with 94,539 entries for the S
 
   <tr>
     <td><a href="https://huggingface.co/datasets/nvidia/OpenMathInstruct-2" target="_blank">OpenMathInstruct-2</a></td>
-    <td>58546</td>
+    <td>51803</td>
     <td>40188</td>
     <td>11615</td>
     <td>Mathematics</td>
@@ -155,7 +155,7 @@ Our final dataset comprised 158,784 total entries, with 94,539 entries for the S
 
   <tr>
     <td><a href="https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k" target="_blank">self-oss-instruct-sc2</a></td>
-    <td>13696</td>
+    <td>13009</td>
     <td>10160</td>
     <td>2849</td>
     <td>Coding</td>
