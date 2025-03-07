@@ -10,7 +10,8 @@ FuseChat-3.0: Preference Optimization for Implicit Model Fusion
 <img src="https://img.shields.io/github/stars/SLIT-AI/FuseChat-3.0?color=yellow" alt="Stars">
 <img src="https://img.shields.io/github/issues/SLIT-AI/FuseChat-3.0?color=red" alt="Issues">
 
-<h4> |<a href="https://arxiv.org/abs/2412.03187"> 📑 Paper </a> |
+<h4> |<a href="https://arxiv.org/abs/2412.03187"> 📑 WRPO Paper </a> |
+<a href="https://arxiv.org/abs/2412.03187"> 📑 FuseChat-3.0 Paper </a> |
 <a href="https://github.com/SLIT-AI/FuseChat-3.0"> 🐱 GitHub Repo </a> |
 <a href="https://huggingface.co/FuseAI"> 🤗 HuggingFace Repo</a> |
 <a href="https://slit-ai.github.io/FuseChat-3.0/"> 🌐 Website </a> |
@@ -882,5 +883,12 @@ The evaluation results of five series fused models are as follows, showing that 
   booktitle={The Thirteenth International Conference on Learning Representations},
   year={2025},
   url={https://openreview.net/forum?id=fq24pEb8SL}
+}
+
+@article{yang2025weightedreward,
+  title={FuseChat-3.0: Preference Optimization Meets Heterogeneous Model Fusion}, 
+  author={Ziyi Yang and Fanqi Wan and Longguang Zhong and Canbin Huang and Guosheng Liang and Xiaojun Quan},
+  journal={arXiv preprint arXiv:2503.04222},
+  year={2025},
 }
 ```
