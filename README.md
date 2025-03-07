@@ -885,7 +885,7 @@ The evaluation results of five series fused models are as follows, showing that 
   url={https://openreview.net/forum?id=fq24pEb8SL}
 }
 
-@article{yang2025weightedreward,
+@article{yang2025fusechat,
   title={FuseChat-3.0: Preference Optimization Meets Heterogeneous Model Fusion}, 
   author={Ziyi Yang and Fanqi Wan and Longguang Zhong and Canbin Huang and Guosheng Liang and Xiaojun Quan},
   journal={arXiv preprint arXiv:2503.04222},
