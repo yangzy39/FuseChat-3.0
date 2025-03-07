@@ -11,7 +11,7 @@ FuseChat-3.0: Preference Optimization for Implicit Model Fusion
 <img src="https://img.shields.io/github/issues/SLIT-AI/FuseChat-3.0?color=red" alt="Issues">
 
 <h4> |<a href="https://arxiv.org/abs/2412.03187"> 📑 WRPO Paper </a> |
-<a href="https://arxiv.org/abs/2412.03187"> 📑 FuseChat-3.0 Paper </a> |
+<a href="https://arxiv.org/pdf/2503.04222"> 📑 FuseChat-3.0 Paper </a> |
 <a href="https://github.com/SLIT-AI/FuseChat-3.0"> 🐱 GitHub Repo </a> |
 <a href="https://huggingface.co/FuseAI"> 🤗 HuggingFace Repo</a> |
 <a href="https://slit-ai.github.io/FuseChat-3.0/"> 🌐 Website </a> |
